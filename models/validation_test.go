@@ -62,7 +62,7 @@ func TestValidateDeviceCheckDetailsObjectValidatesNestedActivityData(t *testing.
 		CheckSessionKey: "key",
 		CheckType:       "DEVICE",
 		ActivityData: []*KeyValuePairObject{
-			&KeyValuePairObject{},
+			{},
 		},
 	}
 
