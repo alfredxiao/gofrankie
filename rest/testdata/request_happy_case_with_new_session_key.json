@@ -1,0 +1,14 @@
+[
+	{
+		"activityType": "SIGNUP",
+		"checkSessionKey": "key3",
+		"checkType": "COMBO",
+		"activityData": [
+			{
+				"kvpKey": "data.key30",
+				"kvpValue": "value",
+				"kvpType": "general.string"
+			}
+		]
+	}
+]

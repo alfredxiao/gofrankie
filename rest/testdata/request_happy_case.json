@@ -1,0 +1,18 @@
+[
+	{
+		"activityType": "SIGNUP",
+		"checkSessionKey": "key1",
+		"checkType": "COMBO",
+		"activityData": [
+			{
+				"kvpKey": "data.key10",
+				"kvpValue": "value",
+				"kvpType": "general.string"
+			}
+		]
+	},{
+		"activityType": "SIGNUP",
+		"checkSessionKey": "key2",
+		"checkType": "DEVICE"
+	}
+]

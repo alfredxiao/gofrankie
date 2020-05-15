@@ -1,0 +1,14 @@
+[
+	{
+		"activityType": "UNKNOWN",
+		"checkSessionKey": "key1",
+		"checkType": "COMBO",
+		"activityData": [
+			{
+				"kvpKey": "data.key10",
+				"kvpValue": "value",
+				"kvpType": "general.string"
+			}
+		]
+	}
+]
