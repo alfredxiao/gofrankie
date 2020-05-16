@@ -4,28 +4,13 @@ gofrankie is a program written in Golang to demonstrate building REST service in
 # Key Technical Points
 - Tested with Golang 1.14.1
 - Use Gin as the REST framework
-- 
+- Does NOT use tool to generate models from swagger doc
 
 # Assumptions
-- Poor or even No CSV content validation
-- CSV file format is correct
-- No timezone consideration, just assume local timezone
-- No input validation (e.g. Threshold argument)
-- No consideration of currency, assuming same currency for all transactions
-- No need to suppress alerts for the same credit card hash.
-    * In other words, if a transaction has triggered an alert, a following transaction from the same hash will likely also trigger another alert (as long as sliding window total is over threshold)
-- Done a feature which might not be necessary but personally feel would of of interest
-    * When an alert is trigger, report the amount of the window, and number of transactions in the window.
+- ??
 
 # Design Considerations and Decisions
-- Java Streaming
-    * map/filter/collect
-    * Easier to read
-- Algorithm
-    * Basically few steps as below
-        * Group by hash, result of this is that each hash yields a list of transactions belonging to same hash
-        * Use a moving/sliding window from first transaction to last to analyse transactions of same hash. Collect possible alerts while moving the window.
-        * Collect all alerts
+- ??
 
 # How to Build
 Assuming Go/Docker is already installed
@@ -45,7 +30,6 @@ Assuming Go/Docker is already installed
 
 # Test the API
 Once `gofrankie` is started, we can test its `isgood` API.
-
 ```
 curl -X POST 'http://localhost:8080/isgood' --header 'Content-Type: application/json' \
 --data-raw '[
