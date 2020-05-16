@@ -9,6 +9,9 @@
 # Assumptions
 - We do not have full list of vendor specific activity type for field `ActivityType`, rather we just treat anything starting with `_` as vendor specific.
 - API client related errors are returned as 400 Bad Request error
+- Assume the default handling from Gin for error cases - e.g. route not found 404 error, internal server error 500 - is acceptable.
+- No Authentication required
+- No TLS/SSL required
 
 # Design Considerations and Decisions
 - Try to separate logic/code into different pacakges while leaving each package not too large
