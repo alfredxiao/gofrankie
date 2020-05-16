@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/alfredxiao/gofrankie/models"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -27,8 +28,10 @@ func TestIsGoodRouteHappyCase(t *testing.T) {
 	assert.Equal(200, w.Code)
 	assert.Contains(getFirstHeader(w.Header(), "Content-Type"), "application/json", "Response is json")
 
-	resp := parse(w.Body.String())
-	assert.Equal(true, resp["puppy"])
+	var puppy models.PuppyObject
+	err = json.Unmarshal(w.Body.Bytes(), &puppy)
+	require.Nil(t, err, "Filed to parse response into PuppyObject")
+	assert.Equal(true, puppy.Puppy)
 }
 
 func TestIsGoodRouteJSONBindingError(t *testing.T) {
@@ -45,8 +48,10 @@ func TestIsGoodRouteJSONBindingError(t *testing.T) {
 	assert.Equal(400, w.Code)
 	assert.Contains(getFirstHeader(w.Header(), "Content-Type"), "application/json", "Response is json")
 
-	resp := parse(w.Body.String())
-	assert.Equal("JSONBinding", resp["errorType"])
+	var errorObject models.ErrorObject
+	err := json.Unmarshal(w.Body.Bytes(), &errorObject)
+	require.Nil(t, err, "Filed to parse response into ErrorObject")
+	assert.Equal(errorJSONBinding, errorObject.Code)
 }
 
 func TestIsGoodRouteDataValidationError(t *testing.T) {
@@ -64,8 +69,10 @@ func TestIsGoodRouteDataValidationError(t *testing.T) {
 	assert.Equal(400, w.Code)
 	assert.Contains(getFirstHeader(w.Header(), "Content-Type"), "application/json", "Response is json")
 
-	resp := parse(w.Body.String())
-	assert.Equal("DataValidation", resp["errorType"])
+	var errorObject models.ErrorObject
+	err = json.Unmarshal(w.Body.Bytes(), &errorObject)
+	require.Nil(t, err, "Filed to parse response into ErrorObject")
+	assert.Equal(errorDataValidation, errorObject.Code)
 }
 
 func TestIsGoodRouteContinuesToWorkWithNewSessionKeys(t *testing.T) {
@@ -91,8 +98,10 @@ func TestIsGoodRouteContinuesToWorkWithNewSessionKeys(t *testing.T) {
 	assert.Equal(200, w2.Code)
 	assert.Contains(getFirstHeader(w2.Header(), "Content-Type"), "application/json", "Response is json")
 
-	resp := parse(w2.Body.String())
-	assert.Equal(true, resp["puppy"])
+	var puppy models.PuppyObject
+	err = json.Unmarshal(w2.Body.Bytes(), &puppy)
+	require.Nil(t, err, "Filed to parse response into PuppyObject")
+	assert.Equal(true, puppy.Puppy)
 }
 
 func TestIsGoodRouteDataDuplicateSessionKeys(t *testing.T) {
@@ -118,15 +127,10 @@ func TestIsGoodRouteDataDuplicateSessionKeys(t *testing.T) {
 	assert.Equal(400, w2.Code)
 	assert.Contains(getFirstHeader(w2.Header(), "Content-Type"), "application/json", "Response is json")
 
-	resp := parse(w2.Body.String())
-	assert.Equal("SessionKeyNonUnique", resp["errorType"])
-}
-
-func parse(jsonStr string) map[string]interface{} {
-	jsonMap := make(map[string]interface{})
-	_ = json.Unmarshal([]byte(jsonStr), &jsonMap)
-
-	return jsonMap
+	var errorObject models.ErrorObject
+	err = json.Unmarshal(w2.Body.Bytes(), &errorObject)
+	require.Nil(t, err, "Filed to parse response into ErrorObject")
+	assert.Equal(errorSessionKeyNonUnique, errorObject.Code)
 }
 
 func getFirstHeader(headerMap http.Header, name string) string {
