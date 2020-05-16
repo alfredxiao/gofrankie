@@ -3,14 +3,18 @@ gofrankie is a program written in Golang to demonstrate building REST service in
 
 # Key Technical Points
 - Tested with Golang 1.14.1
-- Use Gin as the REST framework
+- Uses Gin as the REST framework: https://gin-gonic.com/
 - Does NOT use tool to generate models from swagger doc
 
 # Assumptions
-- ??
+- We do not have full list of vendor specific activity type for field `ActivityType`, rather we just treat anything starting with `_` as vendor specific.
+- API client related errors are returned as 400 error
 
 # Design Considerations and Decisions
-- ??
+- Try to separate logic/code into different pacakges while leaving each package not too large
+- Utilises Gin framework's validation as well as custom extension to validate data
+- Chooses Gin over chi, for its relative simpler/quicker setup, e.g. JSON
+- When testing, try testing at unit level rather than system integration level
 
 # How to Build
 Assuming Go/Docker is already installed
@@ -48,10 +52,16 @@ curl -X POST 'http://localhost:8080/isgood' --header 'Content-Type: application/
 ]'
 ```
 
+# Notes
+- `server.go` has been made this way with the intent to be able to shutdown down it gracefully from both when running in test and from when interrupt signal, e.g. Ctrl-C 
+- Only `server_test.go` requires running real server, other tests are unit level and require no server running
+
 # Room for Improvement
 - Error Codes
     * Define finer grained error codes for various specific errors
-- 100% coverage
+- 100% test coverage
     * Make coverage 100 percent, covering main as well
 - Not hardcode the port number
     * Accept from command argument or environment variable?
+- Make docker image more secure
+    * e.g. not run as root user
