@@ -2,6 +2,7 @@ package rest
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -14,17 +15,22 @@ import (
 var server *http.Server
 
 // StartThenWait starts http server then waits on signal to stop it
-func StartThenWait(address string) {
+func StartThenWait(port int) {
 	router := setupRouter()
 	server = &http.Server{
-		Addr:    address,
+		Addr:    fmt.Sprintf(":%d", port),
 		Handler: router,
 	}
 
 	go func() {
+		log.Println("AAA")
 		if err := server.ListenAndServe(); err != nil {
-			log.Printf("listen error: %s\n", err)
+			log.Fatalf("listen error: %s\n", err)
+			os.Exit(1)
 		}
+
+		log.Println("BBB")
+		log.Printf("Started server on port %d\n", port)
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server with a timeout of 5 seconds.

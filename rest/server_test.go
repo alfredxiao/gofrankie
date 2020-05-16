@@ -25,9 +25,9 @@ func TestServerStarts(t *testing.T) {
 	assert := assert.New(t)
 
 	port, err := freeport.GetFreePort()
-	require.Nil(t, err, "Failed to find a free open port to listen")
+	require.Nil(t, err, "Failed to find a free open port to listen on")
 
-	go StartThenWait(fmt.Sprintf(":%d", port))
+	go StartThenWait(port)
 
 	time.Sleep(200 * time.Millisecond)
 
