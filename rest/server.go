@@ -22,6 +22,7 @@ func StartThenWait(address string) {
 	}
 
 	go func() {
+		log.Printf("Server starting on address %s", address)
 		if err := server.ListenAndServe(); err != nil {
 			log.Printf("listen error: %s\n", err)
 		}
