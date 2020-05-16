@@ -1,14 +1,14 @@
 # About
-gofrankie is a program written in Golang to demonstrate building REST service in Gin framework.
+`gofrankie` is a program written in Golang to demonstrate building REST service in **Gin** framework.
 
 # Key Technical Points
-- Tested with Golang 1.14.1
-- Uses Gin as the REST framework: https://gin-gonic.com/
+- Tested with **Golang 1.14.1**
+- Uses **Gin** as the REST framework: https://gin-gonic.com/
 - Does NOT use tool to generate models from swagger doc
 
 # Assumptions
 - We do not have full list of vendor specific activity type for field `ActivityType`, rather we just treat anything starting with `_` as vendor specific.
-- API client related errors are returned as 400 error
+- API client related errors are returned as 400 Bad Request error
 
 # Design Considerations and Decisions
 - Try to separate logic/code into different pacakges while leaving each package not too large
