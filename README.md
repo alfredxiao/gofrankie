@@ -53,7 +53,7 @@ curl -X POST 'http://localhost:8080/isgood' --header 'Content-Type: application/
 ```
 
 # Notes
-- `server.go` has been made this way with the intent to be able to shutdown down it gracefully from both when running in test and from when interrupt signal, e.g. Ctrl-C 
+- `server.go` has been made this way with the intent to be able to shutdown down it gracefully from both when running in test and from when interrupt signal, e.g. Ctrl-C. Otherwise, it could be made much simpler, with even 20 lines fewer.
 - Only `server_test.go` requires running real server, other tests are unit level and require no server running
 
 # Room for Improvement
