@@ -17,6 +17,7 @@
 - Try to separate logic/code into different pacakges while leaving each package not too large
 - Utilises Gin framework's validation as well as custom extension to validate data
 - Chooses Gin over chi, for its relative simpler/quicker setup, e.g. JSON
+    * Reference: https://brunoscheufler.com/blog/2019-04-26-choosing-the-right-go-web-framework
 - When testing, try testing at unit level rather than system integration level
 
 # How to Build
