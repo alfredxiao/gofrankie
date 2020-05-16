@@ -37,6 +37,7 @@ func TestServerStarts(t *testing.T) {
 	sessions = make(set.Set) // need to reset sessions because it could be already loaded by other tests
 	resp, err := http.Post(fmt.Sprintf("http://localhost:%d/isgood", port), "application/json", file)
 	require.Nil(t, err, "Failed to see response after post")
+
 	assert.Equal(200, resp.StatusCode)
 	if resp.StatusCode != 200 {
 		defer resp.Body.Close()
