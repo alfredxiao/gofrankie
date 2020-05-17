@@ -64,6 +64,8 @@ curl -X POST 'http://localhost:8080/isgood' --header 'Content-Type: application/
 # Room for Improvement
 - Error Codes
     * Define finer grained error codes for various specific errors
+- Return all validation issues in one go rather than return just the first issue encountered
+    * E.g. If request data has two fields not conforming to specification, tell consumers both issues
 - 100% test coverage
     * Make coverage 100 percent, covering main as well
 - Not hardcode the port number
