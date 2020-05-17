@@ -37,9 +37,9 @@ func StartThenWait(address string) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	if err := server.Shutdown(ctx); err != nil {
-		log.Fatal("Server shutdown error:", err)
+		log.Fatal("server shutdown error:", err)
 	}
-	log.Println("Server exit complete")
+	log.Println("server exit complete")
 }
 
 func setupRouter() *gin.Engine {
