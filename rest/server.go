@@ -23,14 +23,10 @@ func StartThenWait(port int) {
 	}
 
 	go func() {
-		log.Println("AAA")
 		if err := server.ListenAndServe(); err != nil {
 			log.Fatalf("listen error: %s\n", err)
 			os.Exit(1)
 		}
-
-		log.Println("BBB")
-		log.Printf("Started server on port %d\n", port)
 	}()
 
 	// Wait for interrupt signal to gracefully shutdown the server with a timeout of 5 seconds.

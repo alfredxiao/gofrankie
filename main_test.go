@@ -48,14 +48,14 @@ func TestServerDoesNotStart(t *testing.T) {
 	defer func() { os.Args = oldArgs }()
 	os.Args = []string{oldArgs[0], "NonInteger"}
 	go main()
+
+	time.Sleep(200 * time.Millisecond)
+	assert.False(isPortListening("8080"))
 }
 
 func isPortListening(port string) bool {
 	timeout := time.Second
-	conn, err := net.DialTimeout("tcp", net.JoinHostPort("localhost", port), timeout)
-	if err != nil {
-		log.Println("Connecting error:", err)
-	}
+	conn, _ := net.DialTimeout("tcp", net.JoinHostPort("localhost", port), timeout)
 	if conn != nil {
 		defer conn.Close()
 		return true
