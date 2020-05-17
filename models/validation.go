@@ -12,7 +12,7 @@ import (
 // Validator validates entites in models package
 var Validator = validator.New()
 
-// KeyValuePairObject validates a KeyValuePairObject, fields that are required, and the value matches its claimed type
+// validateKeyValuePairObject validates a KeyValuePairObject, fields that are required, and the value matches its claimed type
 func validateKeyValuePairObject(kvp KeyValuePairObject) error {
 	if err := Validator.Struct(kvp); err != nil {
 		return err
@@ -37,8 +37,7 @@ func validateKeyValuePairObject(kvp KeyValuePairObject) error {
 
 // validateDeviceCheckDetailsObject validates a details object, including its nested array objects.
 // Note that it does not collect all errors, but rather returns first encountered validation error.
-// And it does not validate uniqueness of session keys, but it validates uniqueness of keys in its
-// ActivityData array
+// And it validates uniqueness of keys in its ActivityData array
 func validateDeviceCheckDetailsObject(detail DeviceCheckDetailsObject) error {
 	if err := Validator.Struct(detail); err != nil {
 		return err
