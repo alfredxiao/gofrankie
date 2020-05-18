@@ -30,6 +30,10 @@ Assuming Go/Docker is already installed
     * run `git clone` and `cd` Same as above
     * run `./docker_build.sh`, which should create an docker image `gofrankie:latest`
 
+# Test
+- Run `go test ./...`
+- Or, Run `./test.sh` which will generate a coverage report and open it in a browser
+
 # How to Run
 - Non Docker
     * run `./gofrankie`, it is hardcoded to listen on port 8080 
